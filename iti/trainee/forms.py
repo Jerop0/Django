@@ -8,7 +8,7 @@ class TraineeForm(forms.Form):
     age = forms.IntegerField()
     degree = forms.DecimalField(decimal_places=2, max_digits=4)
     image = forms.ImageField(label="Profile image")
-    course = forms.ChoiceField(choices=[(c.ID, c.name) for c in Course.objects.all()])
+    course = forms.ModelChoiceField(queryset=Course.objects.all(), label="Course")
 
 
 class TraineeFormModel(forms.ModelForm):

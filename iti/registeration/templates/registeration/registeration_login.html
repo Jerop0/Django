@@ -4,8 +4,7 @@
 <h2>Login</h2>
 <form method="post">
     {% csrf_token %}
-    <label>Username: <input type="text" name="username"></label><br>
-    <label>Password: <input type="password" name="password"></label><br>
+    {{ form.as_p }}
     <input type="submit" value="Login">
 </form>
 <a href="{% url 'Registeration' %}">Back</a>
