@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Course</title>
+</head>
+<body>
+    <h1>Update Course {{ id }}</h1>
+    <form method="post">
+        <label>Name: <input type="text" name="name" value=""></label><br>
+        <input type="submit" value="Update">
+    </form>
+    <a href="{% url 'Course_List' %}">Back to List</a>
+</body>
+</html>
