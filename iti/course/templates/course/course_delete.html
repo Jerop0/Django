@@ -1,0 +1,11 @@
+{% extends 'iti/base.html' %}
+{% block title %}Delete Course{% endblock %}
+{% block content %}
+<h2>Delete Course</h2>
+<p>Are you sure you want to delete "{{ course.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+<a href="{% url 'Course_List' %}">Cancel</a>
+{% endblock %}

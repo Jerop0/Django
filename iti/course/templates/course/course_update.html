@@ -1,0 +1,14 @@
+{% extends 'iti/base.html' %}
+{% block title %}Update Course{% endblock %}
+{% block content %}
+<h2>Update Course</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Name: <input type="text" name="name" value="{{ course.name }}"></label><br>
+    <label>Code: <input type="text" name="code" value="{{ course.code }}"></label><br>
+    <label>Track: <input type="text" name="track" value="{{ course.track }}"></label><br>
+    <input type="submit" value="Update">
+</form>
+<a href="{% url 'Course_Details' course.ID %}">Back</a>
+<a href="{% url 'Course_List' %}">Back to List</a>
+{% endblock %}

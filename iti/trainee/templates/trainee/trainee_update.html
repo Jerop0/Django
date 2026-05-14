@@ -1,0 +1,11 @@
+{% extends 'iti/base.html' %}
+{% block title %}Update Trainee{% endblock %}
+{% block content %}
+<h2>Update Trainee</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+<a href="{% url 'Trainee_List' %}">Back to List</a>
+{% endblock %}

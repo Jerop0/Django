@@ -1,0 +1,17 @@
+{% extends 'iti/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block nav %}
+<nav>
+    <a href="{% url 'admin:index' %}">Admin</a>
+    <a href="{% url 'Trainee_List' %}">Trainee</a>
+    <a href="{% url 'Course_List' %}">Course</a>
+    <a href="{% url 'Registeration' %}">Registration</a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h2>Welcome to ITIan</h2>
+<p>Select a section above.</p>
+{% endblock %}

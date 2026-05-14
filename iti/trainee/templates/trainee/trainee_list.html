@@ -1,0 +1,33 @@
+{% extends 'iti/base.html' %}
+{% block title %}Trainee List{% endblock %}
+{% block content %}
+<h2>Trainee List</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Degree</th>
+        <th>Course</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.ID }}</td>
+        <td><a href="{% url 'Trainee_Details' student.ID %}">{{ student.name }}</a></td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.degree }}</td>
+        <td>{{ student.course.name }}</td>
+        <td>{% if student.image %}<img src="{{ student.image.url }}" width="50">{% endif %}</td>
+        <td>
+            <a href="{% url 'Trainee_Update' student.ID %}">Update</a>
+            <a href="{% url 'Trainee_Delete' student.ID %}">Delete</a>
+            <a href="{% url 'Trainee_Soft_Delete' student.ID %}">Soft Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'Trainee_Add' %}">Add Trainee</a>
+<a href="{% url 'Trainee_add_form' %}">Add Trainee (Generic)</a>
+{% endblock %}
