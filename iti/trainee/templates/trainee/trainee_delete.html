@@ -3,6 +3,15 @@
 {% block content %}
 <h2>Delete Trainee</h2>
 <p>Are you sure you want to delete "{{ trainee.name }}"?</p>
+<table border="1">
+    <tr><th>Name</th><td>{{ trainee.name }}</td></tr>
+    <tr><th>Course</th><td>{{ trainee.course.name }}</td></tr>
+    <tr><th>Age</th><td>{{ trainee.age }}</td></tr>
+    <tr><th>Degree</th><td>{{ trainee.degree }}</td></tr>
+    {% if trainee.image %}
+    <tr><th>Image</th><td><img src="{{ trainee.image.url }}" width="100"></td></tr>
+    {% endif %}
+</table>
 <form method="post">
     {% csrf_token %}
     <input type="submit" value="Delete">

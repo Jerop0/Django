@@ -7,6 +7,11 @@
     <tr><th>Name</th><td>{{ trainee.name }}</td></tr>
     <tr><th>Age</th><td>{{ trainee.age }}</td></tr>
     <tr><th>Degree</th><td>{{ trainee.degree }}</td></tr>
+    <tr><th>Course</th><td>{{ trainee.course.name }}</td></tr>
+    <tr><th>Active</th><td>{{ trainee.is_active }}</td></tr>
+    {% if trainee.image %}
+    <tr><th>Image</th><td><img src="{{ trainee.image.url }}" width="100"></td></tr>
+    {% endif %}
 </table>
 <a href="{% url 'Trainee_Update' trainee.ID %}">Update</a>
 <a href="{% url 'Trainee_Delete' trainee.ID %}">Delete</a>

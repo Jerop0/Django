@@ -2,11 +2,19 @@
 {% block title %}Update Trainee{% endblock %}
 {% block content %}
 <h2>Update Trainee</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <label>Name: <input type="text" name="name" value="{{ trainee.name }}"></label><br>
     <label>Age: <input type="number" name="age" value="{{ trainee.age }}"></label><br>
     <label>Degree: <input type="text" name="degree" value="{{ trainee.degree }}"></label><br>
+    <label>Image: <input type="file" name="image"></label><br>
+    <label>Course:
+        <select name="course">
+            {% for c in courses %}
+            <option value="{{ c.ID }}" {% if c.ID == trainee.course.ID %}selected{% endif %}>{{ c.name }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
     <input type="submit" value="Update">
 </form>
 <a href="{% url 'Trainee_Details' trainee.ID %}">Back</a>

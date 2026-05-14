@@ -8,6 +8,8 @@
         <th>Name</th>
         <th>Age</th>
         <th>Degree</th>
+        <th>Course</th>
+        <th>Active</th>
         <th>Actions</th>
     </tr>
     {% for student in students %}
@@ -16,6 +18,8 @@
         <td><a href="{% url 'Trainee_Details' student.ID %}">{{ student.name }}</a></td>
         <td>{{ student.age }}</td>
         <td>{{ student.degree }}</td>
+        <td>{{ student.course.name }}</td>
+        <td>{{ student.is_active }}</td>
         <td>
             <a href="{% url 'Trainee_Update' student.ID %}">Update</a>
             <a href="{% url 'Trainee_Delete' student.ID %}">Delete</a>
@@ -24,4 +28,5 @@
     {% endfor %}
 </table>
 <a href="{% url 'Trainee_Add' %}">Add Trainee</a>
+<a href="{% url 'Trainee_add_form' %}">Add Trainee (Form)</a>
 {% endblock %}
