@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Trainee</title>
-</head>
-<body>
-    <h1>Update Trainee {{ id }}</h1>
-    <form method="post">
-        <label>Name: <input type="text" name="name" value=""></label><br>
-        <input type="submit" value="Update">
-    </form>
-    <a href="{% url 'Trainee_List' %}">Back to List</a>
-</body>
-</html>
+{% extends 'iti/base.html' %}
+{% block title %}Update Trainee{% endblock %}
+{% block content %}
+<h2>Update Trainee</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Name: <input type="text" name="name" value="{{ trainee.name }}"></label><br>
+    <label>Age: <input type="number" name="age" value="{{ trainee.age }}"></label><br>
+    <label>Degree: <input type="text" name="degree" value="{{ trainee.degree }}"></label><br>
+    <input type="submit" value="Update">
+</form>
+<a href="{% url 'Trainee_Details' trainee.ID %}">Back</a>
+<a href="{% url 'Trainee_List' %}">Back to List</a>
+{% endblock %}

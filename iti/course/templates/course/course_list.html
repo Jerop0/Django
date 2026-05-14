@@ -1,29 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course List</title>
-</head>
-<body>
-    <h1>Course List</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-        {% for course in courses %}
-        <tr>
-            <td>{{ course.id }}</td>
-            <td>{{ course.name }}</td>
-            <td>
-                <a href="{% url 'Course_Update' course.id %}">Update</a>
-                <a href="{% url 'Course_Delete' course.id %}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <a href="{% url 'Course_Add' %}">Add Course</a>
-</body>
-</html>
+{% extends 'iti/base.html' %}
+{% block title %}Course List{% endblock %}
+{% block content %}
+<h2>Course List</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Track</th>
+        <th>Actions</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+        <td>{{ course.ID }}</td>
+        <td><a href="{% url 'Course_Details' course.ID %}">{{ course.name }}</a></td>
+        <td>{{ course.code }}</td>
+        <td>{{ course.track }}</td>
+        <td>
+            <a href="{% url 'Course_Update' course.ID %}">Update</a>
+            <a href="{% url 'Course_Delete' course.ID %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'Course_Add' %}">Add Course</a>
+{% endblock %}

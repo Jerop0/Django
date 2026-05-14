@@ -1,18 +1,42 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Trainee
 
 
 def trainee_list(request):
-    context = {"students": [{"id": 1, "name": "ahmed"}, {"id": 2, "name": "mohamed"}, {"id": 3, "name": "yamen"}]}
-    return render(request, "trainee/trainee_list.html", context)
+    students = Trainee.objects.all()
+    return render(request, "trainee/trainee_list.html", {"students": students})
+
+
+def trainee_details(request, id):
+    trainee = Trainee.objects.get(ID=id)
+    return render(request, "trainee/trainee_details.html", {"trainee": trainee})
 
 
 def trainee_add(request):
+    if request.method == "POST":
+        Trainee.objects.create(
+            name=request.POST["name"],
+            age=request.POST["age"],
+            degree=request.POST["degree"],
+        )
+        return redirect("Trainee_List")
     return render(request, "trainee/trainee_add.html")
 
 
 def trainee_update(request, id):
-    return render(request, "trainee/trainee_update.html", {"id": id})
+    trainee = Trainee.objects.get(ID=id)
+    if request.method == "POST":
+        trainee.name = request.POST["name"]
+        trainee.age = request.POST["age"]
+        trainee.degree = request.POST["degree"]
+        trainee.save()
+        return redirect("Trainee_Details", id=id)
+    return render(request, "trainee/trainee_update.html", {"trainee": trainee})
 
 
 def trainee_delete(request, id):
-    return render(request, "trainee/trainee_delete.html", {"id": id})
+    trainee = Trainee.objects.get(ID=id)
+    if request.method == "POST":
+        trainee.delete()
+        return redirect("Trainee_List")
+    return render(request, "trainee/trainee_delete.html", {"trainee": trainee})
