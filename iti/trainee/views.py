@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View, generic
 from django.urls import reverse_lazy
 from .models import Trainee
-from .forms import TraineeForm, TraineeFormModel
-from course.models import Course
+from .forms import TraineeFormModel
 
 
 class TraineeList(generic.ListView):
@@ -38,21 +37,6 @@ class TraineeAddGeneric(generic.CreateView):
     success_url = reverse_lazy('Trainee_List')
 
 
-def trainee_add_form(request):
-    context = {"trainees": Trainee.objects.all(), "form": TraineeForm()}
-    if request.method == "POST":
-        form = TraineeForm(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            Trainee.objects.create(
-                name=request.POST["name"],
-                age=request.POST["age"],
-                degree=request.POST["degree"],
-                image=request.FILES.get("image"),
-                course=Course.objects.get(pk=request.POST["course"]),
-            )
-            return redirect("Trainee_List")
-    return render(request, "trainee/trainee_add.html", context=context)
-
 
 def trainee_update(request, id):
     trainee = Trainee.objects.get(pk=id)
@@ -73,10 +57,3 @@ def trainee_delete(request, id):
         return redirect("Trainee_List")
     context = {"trainee": trainee}
     return render(request, "trainee/trainee_delete.html", context)
-
-
-def trainee_soft_delete(request, id):
-    trainee = Trainee.objects.get(pk=id)
-    trainee.is_active = False
-    trainee.save()
-    return redirect("Trainee_List")
